@@ -1,0 +1,14 @@
+com\ashkiano\bungeeweb\BungeeWeb.class
+com\ashkiano\bungeeweb\Metrics$AdvancedPie.class
+com\ashkiano\bungeeweb\Metrics$MultiLineChart.class
+com\ashkiano\bungeeweb\Metrics$JsonObjectBuilder.class
+com\ashkiano\bungeeweb\Metrics$AdvancedBarChart.class
+com\ashkiano\bungeeweb\Metrics$CustomChart.class
+com\ashkiano\bungeeweb\Metrics$JsonObjectBuilder$JsonObject.class
+com\ashkiano\bungeeweb\Metrics$SingleLineChart.class
+com\ashkiano\bungeeweb\Metrics$DrilldownPie.class
+com\ashkiano\bungeeweb\Metrics$SimplePie.class
+com\ashkiano\bungeeweb\Metrics$MetricsBase.class
+com\ashkiano\bungeeweb\Metrics.class
+com\ashkiano\bungeeweb\Metrics$1.class
+com\ashkiano\bungeeweb\Metrics$SimpleBarChart.class

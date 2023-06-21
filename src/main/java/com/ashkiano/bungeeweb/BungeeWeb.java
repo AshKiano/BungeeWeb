@@ -11,7 +11,6 @@ import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.*;
 
-//TODO automaticky vytvářet www složku a v ní nějaký basic index.html
 public class BungeeWeb extends Plugin {
     private Server server;
 
@@ -20,6 +19,21 @@ public class BungeeWeb extends Plugin {
         // Create plugin config folder if it doesn't exist
         if (!getDataFolder().exists()) {
             getLogger().info("Created config folder: " + getDataFolder().mkdir());
+        }
+
+        // Create 'www' folder if it doesn't exist
+        File wwwDir = new File("www");
+        if (!wwwDir.exists()) {
+            getLogger().info("Created 'www' folder: " + wwwDir.mkdir());
+
+            // Create 'index.html' inside 'www' folder with "HelloWorld!" content
+            try {
+                FileWriter fileWriter = new FileWriter(new File(wwwDir, "index.html"));
+                fileWriter.write("HelloWorld!");
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         File configFile = new File(getDataFolder(), "config.yml");
@@ -53,7 +67,7 @@ public class BungeeWeb extends Plugin {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
-        context.setResourceBase(new File("www").getAbsolutePath());
+        context.setResourceBase(wwwDir.getAbsolutePath());
 
         ServletHolder holder = context.addServlet(DefaultServlet.class, "/");
         holder.setInitParameter("dirAllowed", "true");
@@ -79,4 +93,3 @@ public class BungeeWeb extends Plugin {
         }
     }
 }
-

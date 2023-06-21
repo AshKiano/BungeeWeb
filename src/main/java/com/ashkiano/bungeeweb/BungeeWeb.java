@@ -10,23 +10,23 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.*;
-
+//TODO udělat všechny hlášky nastavitelné v configu do verze 1.3
 public class BungeeWeb extends Plugin {
     private Server server;
 
     @Override
     public void onEnable() {
-        // Create plugin config folder if it doesn't exist
+        // Check and create the plugin configuration folder if it doesn't exist
         if (!getDataFolder().exists()) {
             getLogger().info("Created config folder: " + getDataFolder().mkdir());
         }
 
-        // Create 'www' folder if it doesn't exist
+        // Check and create 'www' directory if it doesn't exist
         File wwwDir = new File("www");
         if (!wwwDir.exists()) {
             getLogger().info("Created 'www' folder: " + wwwDir.mkdir());
 
-            // Create 'index.html' inside 'www' folder with "HelloWorld!" content
+            // Create 'index.html' file inside 'www' directory with "HelloWorld!" content
             try {
                 FileWriter fileWriter = new FileWriter(new File(wwwDir, "index.html"));
                 fileWriter.write("HelloWorld!");
@@ -40,16 +40,11 @@ public class BungeeWeb extends Plugin {
 
         Metrics metrics = new Metrics(this, 18808);
 
-        // Copy default config if it doesn't exist
+        // Check and copy default config if it doesn't exist
         if (!configFile.exists()) {
-            FileOutputStream outputStream; // Throws IOException
             try {
-                outputStream = new FileOutputStream(configFile);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            InputStream in = getResourceAsStream("config.yml"); // This file must exist in the jar resources folder
-            try {
+                FileOutputStream outputStream = new FileOutputStream(configFile);
+                InputStream in = getResourceAsStream("config.yml"); // This file should exist in the jar resources folder
                 in.transferTo(outputStream); // Throws IOException
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -58,6 +53,7 @@ public class BungeeWeb extends Plugin {
 
         Configuration configuration;
         try {
+            // Load YAML configuration file
             configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -74,6 +70,7 @@ public class BungeeWeb extends Plugin {
         server.setHandler(context);
 
         try {
+            // Start the server
             server.start();
             getLogger().info("Server started on port " + configuration.getInt("port"));
         } catch (Exception e) {
@@ -84,6 +81,7 @@ public class BungeeWeb extends Plugin {
     @Override
     public void onDisable() {
         try {
+            // Stop the server if it is not null
             if (server != null) {
                 server.stop();
                 getLogger().info("Server stopped");

@@ -1,6 +1,17 @@
+# The port on which the server should run
 port: 32303
+
+# Message to be displayed when a new configuration directory is created
 config-folder-created: "New configuration directory created: "
+
+# Message to be displayed when a new 'www' directory is created
 www-folder-created: "New 'www' directory created: "
+
+# Content to be written to the 'index.html' file
 index-content: "Hello World!"
+
+# Message to be displayed when the server starts
 server-started: "Server started on port "
+
+# Message to be displayed when the server stops
 server-stopped: "Server stopped"

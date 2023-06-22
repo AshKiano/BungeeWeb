@@ -10,26 +10,29 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.*;
-//TODO udělat všechny hlášky nastavitelné v configu do verze 1.3
+//TODO udělat config s nastavením jazyka a pár překladových souborů předpřipravit do verze 1.4
+//TODO udělat správně update configu a jeho oprabvu, když je něco špatně
+//TODO nastavit do konzole výpis ip adresy na které port běží a ne jen 0.0.0.0
 public class BungeeWeb extends Plugin {
     private Server server;
+    private Configuration configuration;
 
     @Override
     public void onEnable() {
         // Check and create the plugin configuration folder if it doesn't exist
         if (!getDataFolder().exists()) {
-            getLogger().info("Created config folder: " + getDataFolder().mkdir());
+            getLogger().info(getMsg("config-folder-created", "Created config folder: " + getDataFolder().mkdir()));
         }
 
         // Check and create 'www' directory if it doesn't exist
         File wwwDir = new File("www");
         if (!wwwDir.exists()) {
-            getLogger().info("Created 'www' folder: " + wwwDir.mkdir());
+            getLogger().info(getMsg("www-folder-created", "Created 'www' folder: " + wwwDir.mkdir()));
 
             // Create 'index.html' file inside 'www' directory with "HelloWorld!" content
             try {
                 FileWriter fileWriter = new FileWriter(new File(wwwDir, "index.html"));
-                fileWriter.write("HelloWorld!");
+                fileWriter.write(getMsg("index-content", "HelloWorld!"));
                 fileWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -51,7 +54,6 @@ public class BungeeWeb extends Plugin {
             }
         }
 
-        Configuration configuration;
         try {
             // Load YAML configuration file
             configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
@@ -72,7 +74,7 @@ public class BungeeWeb extends Plugin {
         try {
             // Start the server
             server.start();
-            getLogger().info("Server started on port " + configuration.getInt("port"));
+            getLogger().info(getMsg("server-started", "Server started on port " + configuration.getInt("port")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,10 +86,19 @@ public class BungeeWeb extends Plugin {
             // Stop the server if it is not null
             if (server != null) {
                 server.stop();
-                getLogger().info("Server stopped");
+                getLogger().info(getMsg("server-stopped", "Server stopped"));
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    // Returns the message from the config if exists, otherwise returns the default message
+    private String getMsg(String key, String defaultMsg) {
+        if (configuration != null && configuration.contains(key)) {
+            return configuration.getString(key);
+        } else {
+            return defaultMsg;
         }
     }
 }

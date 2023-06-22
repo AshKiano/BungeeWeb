@@ -1,1 +1,6 @@
 port: 32303
+config-folder-created: "New configuration directory created: "
+www-folder-created: "New 'www' directory created: "
+index-content: "Hello World!"
+server-started: "Server started on port "
+server-stopped: "Server stopped"

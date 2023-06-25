@@ -10,6 +10,8 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.*;
+import java.net.URL;
+
 //TODO udělat config s nastavením jazyka a pár překladových souborů předpřipravit do verze 1.4
 //TODO udělat správně update configu a jeho oprabvu, když je něco špatně
 //TODO nastavit do konzole výpis ip adresy na které port běží a ne jen 0.0.0.0
@@ -74,7 +76,16 @@ public class BungeeWeb extends Plugin {
         try {
             // Start the server
             server.start();
-            getLogger().info(getMsg("server-started", "Server started on port " + configuration.getInt("port")));
+            try {
+                URL whatismyip = new URL("https://checkip.amazonaws.com");
+                BufferedReader in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
+                String ip = in.readLine();
+                getLogger().info("Server started on: " + ip + ":" + configuration.getInt("port"));
+            } catch (Exception e) {
+                getLogger().info(getMsg("server-started", "Server started on port " + configuration.getInt("port")));
+                getLogger().info("Failed to retrieve public IP address.");
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

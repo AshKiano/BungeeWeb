@@ -15,3 +15,6 @@ server-started: "Server started on port "
 
 # Message to be displayed when the server stops
 server-stopped: "Server stopped"
+
+# Message to be displayed when public IP retrieving failed
+public-ip-failed: "Failed to retrieve public IP address."

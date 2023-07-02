@@ -1,0 +1,14 @@
+# Zpráva zobrazená při vytvoření nové složky 'www'
+www-folder-created: "Vytvořena nová složka 'www': "
+
+# Obsah, který bude zapsán do souboru 'index.html'
+index-content: "Ahoj světe!"
+
+# Zpráva zobrazená při spuštění serveru
+server-started: "Server spuštěn na portu "
+
+# Zpráva zobrazená při zastavení serveru
+server-stopped: "Server zastaven"
+
+# Zpráva zobrazená, když se nepodaří získat veřejnou IP adresu
+public-ip-failed: "Nepodařilo se získat veřejnou IP adresu."

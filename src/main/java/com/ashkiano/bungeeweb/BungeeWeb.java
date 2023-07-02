@@ -12,17 +12,60 @@ import net.md_5.bungee.api.plugin.Plugin;
 import java.io.*;
 import java.net.URL;
 
-//TODO udělat config s nastavením jazyka a pár překladových souborů předpřipravit do verze 1.4
 //TODO udělat správně update configu a jeho oprabvu, když je něco špatně
+//TODO upravit tak, aby se tady nemusel definovat seznam jazyků
 public class BungeeWeb extends Plugin {
     private Server server;
     private Configuration configuration;
 
+    // Array of supported languages
+    private String[] languages = {"en", "cs"};
+
     @Override
     public void onEnable() {
+
         // Check and create the plugin configuration folder if it doesn't exist
         if (!getDataFolder().exists()) {
-            getLogger().info(getMsg("config-folder-created", "Created config folder: " + getDataFolder().mkdir()));
+            getLogger().info("Created config folder: " + getDataFolder().mkdir());
+        }
+
+        File configFile = new File(getDataFolder(), "config.yml");
+
+        // Check and copy default config if it doesn't exist
+        if (!configFile.exists()) {
+            try {
+                FileOutputStream outputStream = new FileOutputStream(configFile);
+                InputStream in = getResourceAsStream("config.yml"); // This file should exist in the jar resources folder
+                in.transferTo(outputStream); // Throws IOException
+
+                // Check and create default language files if they don't exist
+                for (String lang : languages) {
+                    File langFile = new File(getDataFolder(), "messages_" + lang + ".yml");
+
+                    if (!langFile.exists()) {
+                        try {
+                            FileOutputStream outputStreamLang = new FileOutputStream(langFile);
+                            InputStream inLang = getResourceAsStream("messages_" + lang + ".yml"); // These files should exist in the jar resources folder
+                            if (inLang == null) {
+                                getLogger().info("Language file messages_" + lang + ".yml not found in resources");
+                                continue;
+                            }
+                            inLang.transferTo(outputStreamLang); // Throws IOException
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        try {
+            // Load YAML configuration file
+            configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         // Check and create 'www' directory if it doesn't exist
@@ -40,27 +83,7 @@ public class BungeeWeb extends Plugin {
             }
         }
 
-        File configFile = new File(getDataFolder(), "config.yml");
-
         Metrics metrics = new Metrics(this, 18808);
-
-        // Check and copy default config if it doesn't exist
-        if (!configFile.exists()) {
-            try {
-                FileOutputStream outputStream = new FileOutputStream(configFile);
-                InputStream in = getResourceAsStream("config.yml"); // This file should exist in the jar resources folder
-                in.transferTo(outputStream); // Throws IOException
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        try {
-            // Load YAML configuration file
-            configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         server = new Server(configuration.getInt("port"));
 
@@ -103,11 +126,32 @@ public class BungeeWeb extends Plugin {
         }
     }
 
-    // Returns the message from the config if exists, otherwise returns the default message
+    // Method to get the message corresponding to a particular key from the language configuration file.
+    // If the key is not present in the language configuration file, it returns a default message.
     private String getMsg(String key, String defaultMsg) {
-        if (configuration != null && configuration.contains(key)) {
-            return configuration.getString(key);
+        // Fetch the language setting from the main configuration file
+        String lang = configuration.getString("language");
+        Configuration langConfig;
+
+        try {
+            // Attempt to load the configuration file for the selected language
+            langConfig = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "messages_" + lang + ".yml"));
+        } catch (IOException e) {
+            // If the language file fails to load, attempt to load the default language file
+            try {
+                langConfig = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "messages_en.yml"));
+            } catch (IOException ex) {
+                // If the default language file also fails to load, throw an exception
+                throw new RuntimeException(ex);
+            }
+        }
+
+        // Check if the key exists in the language configuration file
+        if (langConfig != null && langConfig.contains(key)) {
+            // If the key exists, return the corresponding message
+            return langConfig.getString(key);
         } else {
+            // If the key does not exist, return the default message
             return defaultMsg;
         }
     }

@@ -1,0 +1,14 @@
+# Správa, ktorá sa zobrazí, keď sa vytvorí nový adresár 'www'
+www-folder-created: "Vytvorený nový adresár 'www': "
+
+# Obsah, ktorý sa zapíše do súboru 'index.html'
+index-content: "Ahoj svet!"
+
+# Správa, ktorá sa zobrazí, keď server štartuje
+server-started: "Server štartoval na porte "
+
+# Správa, ktorá sa zobrazí, keď server zastavuje
+server-stopped: "Server zastavený"
+
+# Správa, ktorá sa zobrazí, keď zlyhá získanie verejnej IP adresy
+public-ip-failed: "Získanie verejnej IP adresy zlyhalo."

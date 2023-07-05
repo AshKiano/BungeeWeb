@@ -1,0 +1,14 @@
+# Nachricht, die angezeigt wird, wenn ein neues 'www'-Verzeichnis erstellt wird
+www-folder-created: "Neues 'www'-Verzeichnis erstellt: "
+
+# Inhalt, der in die Datei 'index.html' geschrieben werden soll
+index-content: "Hallo Welt!"
+
+# Nachricht, die angezeigt wird, wenn der Server startet
+server-started: "Server gestartet auf Port "
+
+# Nachricht, die angezeigt wird, wenn der Server stoppt
+server-stopped: "Server gestoppt"
+
+# Nachricht, die angezeigt wird, wenn das Abrufen der öffentlichen IP-Adresse fehlgeschlagen ist
+public-ip-failed: "Abrufen der öffentlichen IP-Adresse fehlgeschlagen."

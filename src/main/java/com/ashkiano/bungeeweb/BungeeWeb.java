@@ -12,6 +12,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 import java.io.*;
 import java.net.URL;
 
+//TODO zmenit port a jazyk prikazem
 //TODO udělat správně update configu a jeho oprabvu, když je něco špatně
 //TODO upravit tak, aby se tady nemusel definovat seznam jazyků
 public class BungeeWeb extends Plugin {
@@ -19,7 +20,7 @@ public class BungeeWeb extends Plugin {
     private Configuration configuration;
 
     // Array of supported languages
-    private String[] languages = {"en", "cs", "sk"};
+    private String[] languages = {"en", "cs", "sk", "de"};
 
     @Override
     public void onEnable() {

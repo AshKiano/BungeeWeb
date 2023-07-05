@@ -1,0 +1,14 @@
+# Message to be displayed when a new 'www' directory is created
+www-folder-created: "新“www”文件夹已创建："
+
+# Content to be written to the 'index.html' file
+index-content: "Hello World!"
+
+# Message to be displayed when the server starts
+server-started: "服务器启动于端口"
+
+# Message to be displayed when the server stops
+server-stopped: "服务器已停止"
+
+# Message to be displayed when public IP retrieving failed
+public-ip-failed: "无法解析公网IP。"

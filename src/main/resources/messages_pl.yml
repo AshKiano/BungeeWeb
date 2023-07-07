@@ -1,0 +1,14 @@
+# Wiadomość do wyświetlenia, gdy utworzony zostanie nowy katalog 'www'
+www-folder-created: "Utworzono nowy katalog 'www': "
+
+# Treść do wpisania do pliku 'index.html'
+index-content: "Witaj świecie!"
+
+# Wiadomość do wyświetlenia, gdy serwer zostanie uruchomiony
+server-started: "Serwer uruchomiony na porcie "
+
+# Wiadomość do wyświetlenia, gdy serwer zostanie zatrzymany
+server-stopped: "Serwer zatrzymany"
+
+# Wiadomość do wyświetlenia, gdy nie udało się pobrac publicznego adresu IP
+public-ip-failed: "Nie udało się pobrać publicznego adresu IP."

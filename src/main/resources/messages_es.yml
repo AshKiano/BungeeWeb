@@ -1,0 +1,14 @@
+# Mensaje que se muestra cuando se crea un nuevo directorio 'www'
+www-folder-created: "Se creó un nuevo directorio 'www': "
+
+# Contenido que se escribirá en el archivo 'index.html'
+index-content: "¡Hola Mundo!"
+
+# Mensaje que se muestra cuando se inicia el servidor
+server-started: "Servidor iniciado en el puerto "
+
+# Mensaje que se muestra cuando se detiene el servidor
+server-stopped: "Servidor detenido"
+
+# Mensaje que se muestra cuando falla la recuperación de la dirección IP pública
+public-ip-failed: "Falló al recuperar la dirección IP pública."

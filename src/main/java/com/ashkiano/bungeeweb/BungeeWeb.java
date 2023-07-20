@@ -20,7 +20,7 @@ public class BungeeWeb extends Plugin {
     private Configuration configuration;
 
     // Array of supported languages
-    private String[] languages = {"en", "cs", "sk", "de", "zh_cn", "pl"};
+    private String[] languages = {"en", "cs", "sk", "de", "zh_cn", "pl", "es"};
 
     @Override
     public void onEnable() {

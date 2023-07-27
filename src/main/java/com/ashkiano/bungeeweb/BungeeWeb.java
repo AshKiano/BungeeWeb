@@ -112,6 +112,8 @@ public class BungeeWeb extends Plugin {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println("Thank you for using the BungeeWeb plugin! If you enjoy using this plugin, please consider making a donation to support the development. You can donate at: https://paypal.me/josefvyskocil");
     }
 
     @Override

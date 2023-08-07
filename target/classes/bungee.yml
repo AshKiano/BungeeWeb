@@ -1,5 +1,5 @@
 name: BungeeWeb
-version: '1.13'
+version: '1.14'
 main: com.ashkiano.bungeeweb.BungeeWeb
 author: AshKiano
 description: Setups webserver on bungeecord server

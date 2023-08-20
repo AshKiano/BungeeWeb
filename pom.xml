@@ -6,7 +6,7 @@
 
     <groupId>com.ashkiano</groupId>
     <artifactId>BungeeWeb</artifactId>
-    <version>1.14</version>
+    <version>1.15</version>
     <packaging>jar</packaging>
 
     <name>BungeeWeb</name>
@@ -77,6 +77,11 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
             <version>11.0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
         </dependency>
     </dependencies>
 </project>

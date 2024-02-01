@@ -115,7 +115,7 @@ public class BungeeWeb extends Plugin {
             e.printStackTrace();
         }
 
-        getLogger().info("Thank you for using the BungeeWeb plugin! If you enjoy using this plugin, please consider making a donation to support the development. You can donate at: https://paypal.me/josefvyskocil");
+        getLogger().info("Thank you for using the BungeeWeb plugin! If you enjoy using this plugin, please consider making a donation to support the development. You can donate at: https://donate.ashkiano.com");
 
         checkForUpdates();
     }

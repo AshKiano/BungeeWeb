@@ -6,7 +6,7 @@
 
     <groupId>com.ashkiano</groupId>
     <artifactId>BungeeWeb</artifactId>
-    <version>1.15</version>
+    <version>1.16</version>
     <packaging>jar</packaging>
 
     <name>BungeeWeb</name>
